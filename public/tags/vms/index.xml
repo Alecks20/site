@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Vms on Alecks</title>
+    <link>http://localhost:1313/tags/vms/</link>
+    <description>Recent content in Vms on Alecks</description>
+    <image>
+      <title>Alecks</title>
+      <url>http://localhost:1313/images/papermod-cover.png</url>
+      <link>http://localhost:1313/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Alecks 2025</copyright>
+    <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/vms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How I host Linux VMs for people in my Homelab</title>
+      <link>http://localhost:1313/posts/vps-service/</link>
+      <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/vps-service/</guid>
+      <description>&lt;p&gt;A lot of my Homelab typically sits idle, wasting power. So I had the idea of letting other people run their own linux virtual machines on it, kinda like how gcp offers &amp;ldquo;spot&amp;rdquo; vms for much cheaper as it uses excess compute capacity.&lt;/p&gt;
+&lt;p&gt;Obviously I can&amp;rsquo;t provide this as a paid service since that comes with a lot of liability and legal documents to protect yourself, so I just offer it as a free service for friends.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

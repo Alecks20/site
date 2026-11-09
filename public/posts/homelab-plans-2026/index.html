@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Homelab Plan for 2026 | Alecks</title>
+<meta name="keywords" content="servers, homelab, self-hosting">
+<meta name="description" content="As great as my homelab is, there&rsquo;s still a ton of improvements I wanna make it to it for reliability, scalability and to learn new technologies, so lets go through them.
+2026 is gonna be the year of upgrades, as I&rsquo;ll be employed making probably around 2k per month depending on how many hours I work.
+Moving to Rackmount Hardware
+Not only would moving to a proper server rack (most likely this one) make it easier to add new compute nodes compared to the shelf all my hardware is currently on, it also looks way cooler.">
+<meta name="author" content="Alecks">
+<link rel="canonical" href="http://localhost:1313/posts/homelab-plans-2026/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2fd9135862a3da866393a267370bb97cd812193a02eb63558b88b00f30ec3648.css" integrity="sha256-L9kTWGKj2oZjk6JnNwu5fNgSGToC62NVi4iwDzDsNkg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/homelab-plans-2026/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/homelab-plans-2026/">
+  <meta property="og:site_name" content="Alecks">
+  <meta property="og:title" content="Homelab Plan for 2026">
+  <meta property="og:description" content="As great as my homelab is, there’s still a ton of improvements I wanna make it to it for reliability, scalability and to learn new technologies, so lets go through them.
+2026 is gonna be the year of upgrades, as I’ll be employed making probably around 2k per month depending on how many hours I work.
+Moving to Rackmount Hardware Not only would moving to a proper server rack (most likely this one) make it easier to add new compute nodes compared to the shelf all my hardware is currently on, it also looks way cooler.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-19T00:00:00+00:00">
+    <meta property="article:tag" content="Servers">
+    <meta property="article:tag" content="Homelab">
+    <meta property="article:tag" content="Self-Hosting">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+  <meta name="twitter:title" content="Homelab Plan for 2026">
+  <meta name="twitter:description" content="As great as my homelab is, there’s still a ton of improvements I wanna make it to it for reliability, scalability and to learn new technologies, so lets go through them.
+2026 is gonna be the year of upgrades, as I’ll be employed making probably around 2k per month depending on how many hours I work.
+Moving to Rackmount Hardware Not only would moving to a proper server rack (most likely this one) make it easier to add new compute nodes compared to the shelf all my hardware is currently on, it also looks way cooler.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Homelab Plan for 2026",
+      "item": "http://localhost:1313/posts/homelab-plans-2026/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Homelab Plan for 2026",
+  "name": "Homelab Plan for 2026",
+  "description": "As great as my homelab is, there\u0026rsquo;s still a ton of improvements I wanna make it to it for reliability, scalability and to learn new technologies, so lets go through them.\n2026 is gonna be the year of upgrades, as I\u0026rsquo;ll be employed making probably around 2k per month depending on how many hours I work.\nMoving to Rackmount Hardware Not only would moving to a proper server rack (most likely this one) make it easier to add new compute nodes compared to the shelf all my hardware is currently on, it also looks way cooler.\n",
+  "keywords": [
+    "servers", "homelab", "self-hosting"
+  ],
+  "articleBody": "As great as my homelab is, there’s still a ton of improvements I wanna make it to it for reliability, scalability and to learn new technologies, so lets go through them.\n2026 is gonna be the year of upgrades, as I’ll be employed making probably around 2k per month depending on how many hours I work.\nMoving to Rackmount Hardware Not only would moving to a proper server rack (most likely this one) make it easier to add new compute nodes compared to the shelf all my hardware is currently on, it also looks way cooler.\nTo achieve this I’m gonna be moving from my Edgerouter 4 to a custom rackmount opnsense router. As for compute nodes, I’ll be moving Navi into a rackmount case.\nI’ll also be installing a patch panel so everything is nice and cable managed, with proper labeling to save future me a few all nighters.\nNew Machines Not only am I gonna be moving my existing node (Lightsail) into a Silverstone RM23-502 Mini 2U rackmount case to add to the rack and turning it into a VPS host node, I’m also gonna be adding a few new nodes to the cluster.\nVPS Host Node As you probably read above, I’m gonna turn Lightsail into a dedicated node for hosting VPS servers for relability purposes (If I do any hardware changes on my personal machines other peoples stuff isn’t affected) and to give my stuff more resources.\nNew Primary Machine My current primary node (Navi) has served me well but I need an upgrade for better performance and reliability (Such as implementing Raid 1, old motherboard only has 1 NVMe slot)\nThe hardware config is gonna look something like this\nCPU: Ryzen 7 7700 Memory: 128/192GB DDR5 RAM (Depending on budget) Storage: Dual 2TB NVMe SSDs (Raid 1) Case: Silverstone RM23-502 Mini 2U Power Supply: Corsair RM850x This machine is gonna be used to host linux labs, remote workspaces, game servers, hosting/mirroring my GitHub repos and packages, running my personal website and various other personal services.\nStorage Server My current onsite backup server (read more about that here) is great but I want something with way more than 1TB of storage and some proper redundancy. It’ll run a PBS VM (VM Backups) and Minio VM.\nI’m not entirely sure what kind of hardware to get yet, but probably something not too powerful built for a good balance of efficiency and cost effectiveness\nCPU: Ryzen 5 7600 Memory: 32GB DDR Storage: a lot of high-capacity HDDs, not sure exactly how much yet Case: Silverstone RM22-308 Power Supply: Corsair RM850 Those are all the machines I have planned for right now, I’ve had ideas for a 3 node ceph cluster instead of the single storage server but It’ll be way overkill for my needs and also a dedicated game server machine but that’ll only be needed if my other services need more resources, which with the new primary compute node (an absolute beast) is highly unlikely.\nNetwork Upgrades Since the NBN just released new 2 Gigabit plans the older maxxed out 1 Gigabit high upload plans (1000/400) just dropped in price by like $33 per month (On my ISP), currently my Internet is 1000/100 which means that big backups take weeks to upload, upgrading to 1000/400 would be a humungous noticeable improvement.\nPower Backups Recently my power has been pretty unstable and a UPS has seemed more and more critical for smooth operations, with the migration to a server rack I will be installing a dual UPS system, heres a basic rundown\nUPS 1: Critical devices including the Router, NBN Box and Switch UPS 2: Compute nodes - VPS Host, Primary Machine \u0026 Storage Server Seperating networking infrastructure from compute nodes means that nothing gets overloaded and is overall just good practice.\nBoth will be a Cyberpower rackmount UPS (Not sure exactly which model yet)\nClosing Thoughts Upgrading my Homelab into a more sophisticated setup such as the one above might seem overkill but is essential for someone like me who uses it as their own “Digital Garden”, it stores all my projects, personal notes, remote labs and much more so it must be as resilient and reliable as my budget allows.\nI’m not sure what changes I’m gonna make after these as anything more than this is probably actually overkill and will make the power bill even higher, but we’ll see what the future holds.\n",
+  "wordCount" : "738",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2025-09-19T00:00:00Z",
+  "dateModified": "2025-09-19T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alecks"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/homelab-plans-2026/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Alecks",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicons/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Alecks (Alt + H)">Alecks</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/skills/" title="Skills">
+                    <span>Skills</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/homelab/" title="Homelab">
+                    <span>Homelab</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search">
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      Homelab Plan for 2026
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-09-19T00:00:00+00:00'>September 19, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>Alecks</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">Table of Contents</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#moving-to-rackmount-hardware" aria-label="Moving to Rackmount Hardware">Moving to Rackmount Hardware</a></li>
+            <li>
+                <a href="#new-machines" aria-label="New Machines">New Machines</a><ul>
+                    
+            <li>
+                <a href="#vps-host-node" aria-label="VPS Host Node">VPS Host Node</a></li>
+            <li>
+                <a href="#new-primary-machine" aria-label="New Primary Machine">New Primary Machine</a></li>
+            <li>
+                <a href="#storage-server" aria-label="Storage Server">Storage Server</a></li></ul>
+            </li>
+            <li>
+                <a href="#network-upgrades" aria-label="Network Upgrades">Network Upgrades</a></li>
+            <li>
+                <a href="#power-backups" aria-label="Power Backups">Power Backups</a></li>
+            <li>
+                <a href="#closing-thoughts" aria-label="Closing Thoughts">Closing Thoughts</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p>As great as my homelab is, there&rsquo;s still a ton of improvements I wanna make it to it for reliability, scalability and to learn new technologies, so lets go through them.</p>
+<p>2026 is gonna be the year of upgrades, as I&rsquo;ll be employed making probably around 2k per month depending on how many hours I work.</p>
+<h2 id="moving-to-rackmount-hardware">Moving to Rackmount Hardware<a hidden class="anchor" aria-hidden="true" href="#moving-to-rackmount-hardware">#</a></h2>
+<p>Not only would moving to a proper server rack (most likely <a href="https://www.amazon.com.au/VEVOR-Adjustable-Standing-Networking-Equipment/dp/B0C64YY7G7">this one</a>) make it easier to add new compute nodes compared to the shelf all my hardware is currently on, it also looks way cooler.</p>
+<p>To achieve this I&rsquo;m gonna be moving from my Edgerouter 4 to a custom rackmount <a href="https://opnsense.org">opnsense</a> router. As for compute nodes, I&rsquo;ll be moving Navi into a rackmount case.</p>
+<p>I&rsquo;ll also be installing a patch panel so everything is nice and cable managed, with proper labeling to save future me a few all nighters.</p>
+<h2 id="new-machines">New Machines<a hidden class="anchor" aria-hidden="true" href="#new-machines">#</a></h2>
+<p>Not only am I gonna be moving my existing node (Lightsail) into a <a href="https://www.scorptec.com.au/product/cases/server-&amp;-rackmount/97350-sst-rm23-502-mini">Silverstone RM23-502 Mini 2U</a> rackmount case to add to the rack and turning it into a VPS host node, I&rsquo;m also gonna be adding a few new nodes to the cluster.</p>
+<h3 id="vps-host-node">VPS Host Node<a hidden class="anchor" aria-hidden="true" href="#vps-host-node">#</a></h3>
+<p>As you probably read above, I&rsquo;m gonna turn Lightsail into a dedicated node for hosting VPS servers for relability purposes (If I do any hardware changes on my personal machines other peoples stuff isn&rsquo;t affected) and to give my stuff more resources.</p>
+<h3 id="new-primary-machine">New Primary Machine<a hidden class="anchor" aria-hidden="true" href="#new-primary-machine">#</a></h3>
+<p>My current primary node (Navi) has served me well but I need an upgrade for better performance and reliability (Such as implementing Raid 1, old motherboard only has 1 NVMe slot)</p>
+<p>The hardware config is gonna look something like this</p>
+<ul>
+<li>CPU: Ryzen 7 7700</li>
+<li>Memory: 128/192GB DDR5 RAM (Depending on budget)</li>
+<li>Storage: Dual 2TB NVMe SSDs (Raid 1)</li>
+<li>Case: <a href="https://www.scorptec.com.au/product/cases/server-&amp;-rackmount/97350-sst-rm23-502-mini">Silverstone RM23-502 Mini 2U</a></li>
+<li>Power Supply: Corsair RM850x</li>
+</ul>
+<p>This machine is gonna be used to host linux labs, remote workspaces, game servers, hosting/mirroring my GitHub repos and packages, running my personal website and various other personal services.</p>
+<h3 id="storage-server">Storage Server<a hidden class="anchor" aria-hidden="true" href="#storage-server">#</a></h3>
+<p>My current onsite backup server (read more about that <a href="">here</a>) is great but I want something with way more than 1TB of storage and some proper redundancy. It&rsquo;ll run a PBS VM (VM Backups) and Minio VM.</p>
+<p>I&rsquo;m not entirely sure what kind of hardware to get yet, but probably something not too powerful built for a good balance of efficiency and cost effectiveness</p>
+<ul>
+<li>CPU: Ryzen 5 7600</li>
+<li>Memory: 32GB DDR</li>
+<li>Storage: a lot of high-capacity HDDs, not sure exactly how much yet</li>
+<li>Case: <a href="https://www.silverstonetek.com/en/product/info/server-nas/RM22-308/">Silverstone RM22-308</a></li>
+<li>Power Supply: Corsair RM850</li>
+</ul>
+<hr>
+<p>Those are all the machines I have planned for right now, I&rsquo;ve had ideas for a 3 node ceph cluster instead of the single storage server but It&rsquo;ll be way overkill for my needs and also a dedicated game server machine but that&rsquo;ll only be needed if my other services need more resources, which with the new primary compute node (an absolute beast) is highly unlikely.</p>
+<h2 id="network-upgrades">Network Upgrades<a hidden class="anchor" aria-hidden="true" href="#network-upgrades">#</a></h2>
+<p>Since the NBN just released new 2 Gigabit plans the older maxxed out 1 Gigabit high upload plans (1000/400) just dropped in price by like $33 per month (On my ISP), currently my Internet is 1000/100 which means that big backups take <em>weeks</em> to upload, upgrading to 1000/400 would be a humungous noticeable improvement.</p>
+<h2 id="power-backups">Power Backups<a hidden class="anchor" aria-hidden="true" href="#power-backups">#</a></h2>
+<p>Recently my power has been pretty unstable and a UPS has seemed more and more critical for smooth operations, with the migration to a server rack I will be installing a dual UPS system, heres a basic rundown</p>
+<ul>
+<li>UPS 1: Critical devices including the Router, NBN Box and Switch</li>
+<li>UPS 2: Compute nodes - VPS Host, Primary Machine &amp; Storage Server</li>
+</ul>
+<p>Seperating networking infrastructure from compute nodes means that nothing gets overloaded and is overall just good practice.</p>
+<p>Both will be a Cyberpower rackmount UPS (Not sure exactly which model yet)</p>
+<h2 id="closing-thoughts">Closing Thoughts<a hidden class="anchor" aria-hidden="true" href="#closing-thoughts">#</a></h2>
+<p>Upgrading my Homelab into a more sophisticated setup such as the one above might seem overkill but is essential for someone like me who uses it as their own &ldquo;Digital Garden&rdquo;, it stores all my projects, personal notes, remote labs and much more so it must be as resilient and reliable as my budget allows.</p>
+<p>I&rsquo;m not sure what changes I&rsquo;m gonna make after these as anything more than this is probably actually overkill and will make the power bill even higher, but we&rsquo;ll see what the future holds.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/servers/">Servers</a></li>
+      <li><a href="http://localhost:1313/tags/homelab/">Homelab</a></li>
+      <li><a href="http://localhost:1313/tags/self-hosting/">Self-Hosting</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Alecks 2025</span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        
+        let menuScrollTimeout;
+        menu.addEventListener("scroll", function () {
+            clearTimeout(menuScrollTimeout);
+            menuScrollTimeout = setTimeout(function () {
+                localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+            }, 150);
+        }, { passive: true });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            const target = document.querySelector(`[id='${decodeURIComponent(id)}']`);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                target.scrollIntoView();
+            }
+            
+            
+            if (target.tabIndex < 0 && !target.hasAttribute("tabindex")) {
+                target.setAttribute("tabindex", "-1");
+            }
+            target.focus({ preventScroll: true });
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    var scrollTicking = false;
+    
+    window.addEventListener("scroll", function () {
+        if (scrollTicking) {
+            return;
+        }
+        scrollTicking = true;
+        requestAnimationFrame(function () {
+            const scrollThreshold = window.innerHeight;
+            const shown = document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold;
+            toplink.classList.toggle("hidden", !shown);
+            scrollTicking = false;
+        });
+    }, { passive: true });
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

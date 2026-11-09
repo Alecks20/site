@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Alecks</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Alecks</description>
+    <image>
+      <title>Alecks</title>
+      <url>http://localhost:1313/images/papermod-cover.png</url>
+      <link>http://localhost:1313/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Alecks 2025</copyright>
+    <lastBuildDate>Wed, 01 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homelab Tour (Mid 2026)</title>
+      <link>http://localhost:1313/posts/homelab-mid-2026/</link>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/homelab-mid-2026/</guid>
+      <description>&lt;p&gt;To start with the mid 2026 homelab tour, some very significant changes have happened that&amp;rsquo;ve completely elevated the setup onto another level.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The installation of my new 1600VA pure sinewave ups, this has already kept my homelab online during late night 30-40 minute power outages.&lt;/li&gt;
+&lt;li&gt;Moving to a server rack and rackmount hardware, this has made the setup look much more refined and helped a lot with organisation&lt;/li&gt;
+&lt;li&gt;New full size server, au-prox-03 which is built using parts ganked out of a hp prodesk and ssd from a laptop put with a new motherboard, casing and psu.&lt;/li&gt;
+&lt;li&gt;Moved au-prox-02 onto a new i5 10th gen nuc and am now using the i5 7th gen mini pc as a proxmox backup server.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This post will consist of changes since the &lt;a href=&#34;http://localhost:1313/posts/homelab-tour-early-2026/&#34;&gt;last post&lt;/a&gt;, anything not mentioned here has been kept the same.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Homelab Tour (Early 2026)</title>
+      <link>http://localhost:1313/posts/homelab-tour-early-2026/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/homelab-tour-early-2026/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;The mid-2026 homelab tour is &lt;a href=&#34;http://localhost:1313/posts/homelab-mid-2026/&#34;&gt;now here&lt;/a&gt;!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Over these past few months of early 2026 my homelab has expanded to host many new game servers, proxy friends services and even run my own mini streaming service.&lt;/p&gt;
+&lt;p&gt;So I&amp;rsquo;ll be taking you through everything behind the scenes that makes this possible, how I keep everything stable and my future expansion plans.&lt;/p&gt;
+&lt;h2 id=&#34;services&#34;&gt;Services&lt;/h2&gt;
+&lt;h3 id=&#34;managed-game-hosting&#34;&gt;Managed Game Hosting&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;ve had my game hosting platform for a while but only just recently has it become pretty active and filled to capacity, I actually had to upgrade the ram on one of my physical machines to accomodate for this demand.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Moving to Prometheus and deploying a k3s cluster</title>
+      <link>http://localhost:1313/posts/prometheus-and-k3s/</link>
+      <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/prometheus-and-k3s/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been watching a lot of homelabbing content recently and decided to setup some new services specifically for improving reliability, observability and adding new functionality.&lt;/p&gt;
+&lt;p&gt;My knowledge is quite limited currently as I&amp;rsquo;m just getting started, I intend to slowly improve these setups overtime.&lt;/p&gt;
+&lt;h2 id=&#34;prometheus-and-grafana--on-prem-monitoring&#34;&gt;Prometheus and Grafana / On-prem monitoring&lt;/h2&gt;
+&lt;p&gt;To prevent me from having no insignt into my homelab during an internet outage, I needed a monitoring solution that runs locally and stores everything locally, not on someone elses server. So I landed on prometheus as the monitoring service hooked up to grafana to visualize the data all running in docker.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setting up and securing a personal NTFY server</title>
+      <link>http://localhost:1313/posts/ntfy-server/</link>
+      <pubDate>Sat, 06 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ntfy-server/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://ntfy.sh&#34;&gt;Ntfy&lt;/a&gt; is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.&lt;/p&gt;
+&lt;p&gt;Heres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on &lt;a href=&#34;http://localhost:1313/posts/securing-server/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The state of my Homelab in 2025</title>
+      <link>http://localhost:1313/posts/homelab-2025/</link>
+      <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/homelab-2025/</guid>
+      <description>&lt;p&gt;Currently my Homelab is used to run services for personal use, my stuff exposed to the internet and services for friends or people in my local community.&lt;/p&gt;
+&lt;p&gt;The original goal of this setup was to build a service that lets me cancel most of my vps subscriptions, which so far has succeeded, the next goal is to make the service as reliable or close to as reliable as a proper hosting provider.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Exposing self-hosted applications without a Public IP address</title>
+      <link>http://localhost:1313/posts/exposing-services/</link>
+      <pubDate>Sat, 30 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/exposing-services/</guid>
+      <description>&lt;p&gt;In a perfect world everyone could port forward and use an ISP with DDoS Protection and Static IPs, however we don&amp;rsquo;t live in a perfect world. Many people have to deal with things like CGNAT (no public ip) and annoying ISPs.&lt;/p&gt;
+&lt;p&gt;So here are a few &lt;strong&gt;free and paid&lt;/strong&gt; solutions for exposing both web applications and game servers to the internet without port forwarding.&lt;/p&gt;
+&lt;h2 id=&#34;cloudflare-tunnels&#34;&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/&#34;&gt;Cloudflare Tunnels&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This is a completely free service which supports exposing only web applications to the internet using an application (cloudflared) running on your server which tunnels traffic out and exposes it via the Cloudflare Network&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Securing ssh on your Linux Server</title>
+      <link>http://localhost:1313/posts/securing-server/</link>
+      <pubDate>Thu, 25 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/securing-server/</guid>
+      <description>&lt;p&gt;This post is made for debian based linux distros.&lt;/p&gt;
+&lt;h3 id=&#34;dont-expose-ssh-use-a-vpn&#34;&gt;Don&amp;rsquo;t expose ssh, use a VPN&lt;/h3&gt;
+&lt;p&gt;This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.&lt;/p&gt;
+&lt;h3 id=&#34;non-root-account-for-logins--disable-root-login&#34;&gt;Non-root account for logins / Disable root login&lt;/h3&gt;
+&lt;p&gt;Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Starting my Homelab</title>
+      <link>http://localhost:1313/posts/starting-homelab/</link>
+      <pubDate>Fri, 29 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/starting-homelab/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;This is a very old post, I now have a fully functional homelab &lt;a href=&#34;http://localhost:1313/homelab&#34;&gt;here&lt;/a&gt; - and a full walkthrough of everything on it &lt;a href=&#34;http://localhost:1313/posts/homelab-2025/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Im planning to start a homelab this year so I can get real hands on experience with server hardware and software, and also own my information and data instead of having to trust hosting companies with it&lt;/p&gt;
+&lt;h2 id=&#34;upsides-to-running-one&#34;&gt;Upsides to running one&lt;/h2&gt;
+&lt;p&gt;Most programmers and developers have a homelab for a few reasons&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Common Misconceptions about IP Addresses</title>
+      <link>http://localhost:1313/posts/ip-address-misconceptions/</link>
+      <pubDate>Sat, 24 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ip-address-misconceptions/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s a common misconception that if someone gets your IP address they can find your real home address, get your exact location, hack all your passwords, etc. None of this is true and the only real threat is something like a DDoS attack (Not the same as being doxxed). They can usually also see your general location like City or Neighborhood depending on where you are, you can see what your IP says about you on a site like &lt;a href=&#34;https://whatismyipaddress.com&#34;&gt;this&lt;/a&gt; if you&amp;rsquo;re worried about it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About Me</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a self-taught sysadmin from Australia interested in system administration, networking, computer hardware, programming and homelabbing.&lt;/p&gt;
+&lt;p&gt;This website is used to showcase my work and experience and document everything for myself.&lt;/p&gt;
+&lt;p&gt;You can reach out to me via &lt;a href=&#34;mailto:me@alecks.dev&#34;&gt;me@alecks.dev&lt;/a&gt; (email) or discord (alecks20), I&amp;rsquo;ll do my best to respond within a few days.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Homelab</title>
+      <link>http://localhost:1313/homelab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/homelab/</guid>
+      <description>&lt;p&gt;This setup hosts all of my core infrastructure which consists of several Linux VMs and a couple LXC Containers. VM nodes run Proxmox VE (Clustered).&lt;/p&gt;
+&lt;p&gt;The VMs themself run various different services including game servers for me and my friends, aquaintances or small communities, a small jellyfin instance, fluxer, proxmox backup server, truenas, linux vms for friends or act as an offsite backup location.&lt;/p&gt;
+&lt;h3 id=&#34;compute-nodes---live-status&#34;&gt;Compute Nodes - &lt;a href=&#34;https://status.alecks.dev&#34;&gt;Live Status&lt;/a&gt;&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Name&lt;/th&gt;
+					&lt;th&gt;CPU&lt;/th&gt;
+					&lt;th&gt;RAM&lt;/th&gt;
+					&lt;th&gt;Storage&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;au-prox-01&lt;/td&gt;
+					&lt;td&gt;Ryzen 7 5700x&lt;/td&gt;
+					&lt;td&gt;64GB DDR4&lt;/td&gt;
+					&lt;td&gt;1TB NVMe, 6tb HDD&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;au-prox-02&lt;/td&gt;
+					&lt;td&gt;Ryzen 5 5500&lt;/td&gt;
+					&lt;td&gt;16GB DDR4&lt;/td&gt;
+					&lt;td&gt;256GB NVMe, 2x 2tb HDDs&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;au-bak-01&lt;/td&gt;
+					&lt;td&gt;Core i5-7400T&lt;/td&gt;
+					&lt;td&gt;8GB DDR4&lt;/td&gt;
+					&lt;td&gt;512GB NVMe&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;(Anything on the status page not shown above is either a vm or vps)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,70 @@
+
++++
+author = "Alecks"
+title = "Changes to my Homelab (Early 2026)"
+date = "2026-04-01"
+description = "Some changes I've made to my homelab and new services I'm hosting in early 2026."
+tags = [
+    "servers","homelab","self-hosting"
+]
++++
+As I self host more and more services and expand my mini game hosting service I hit some capacity limits along the way that required me to expand and upgrade existing systems. 
+I'll take you through everything thats changed on the hardware side, software side and some new services I'm running.
+
+## Hardware Additions
+### Dedicated monitoring box
+After having issues with proxmox I figured it would be a good idea to have a seperate server outside of my proxmox cluster that does monitoring as its usually not a great idea to run the monitor on what you're monitoring.
+
+So I picked up a super cheap mini pc off ebay with an i3, 8gb ram and a 256gb ssd for AU$50 (au-mtr-01) and moved everything from the monitoring vm to this dedicated server which involved just moving the docker folder over.
+
+### New Mid-Range Node
+With how much new stuff I've deployed onto au-prox-01, I got a new sff server (dell optiplex off ebay for $280) to host my personal services and take them off my ryzen box which I consider to be my "production" machine as it hosts live services for other people so it makes sense to seperate personal things with production.
+
+However pretty much everything I use now I share with friends so its considered "production" so this machine has kinda just been sitting around without a use, just recently I've set it up to host linux vms for my friends kind of like a vps hosting service but not official as its just proxmox, they access it over tailscale and if they want to expose anything to the internet I have to manually setup a port forwarding rule or change my caddy config.
+
+### New Networking Gear
+Just recently I also swapped out my main network switch since I had fully run out of ports and a bunch of ethernet cables to keep it uniform as some of the old cables were varying in speeds, age and quality.
+
+### RAM Upgrade
+As I've added more and more game servers I've really been squeezing as much as I can but it got too tight (nothings crashed yet) but we were using so much swap and amazon had 32gb ddr4 for half price (still $250) so I ordered some and upgraded au-prox-01 to 64gb of ram which has gotten rid of so much stress as theres tons of breathing room and I'm not constantly checking ram and swap usage. 
+
+50gb is allocated to my game server vm while the other 14gb is for other stuff like Jellyfin, Pyrodactyl and Matrix.
+
+## Services and Software
+### Game Server Hosting
+My mini game hosting service has expanded lots, as you've read above with the ram upgrade I was hitting capacity limits as I've had a few friends and aquanintances ask me to host a server for them. 
+
+Right now I'm hosting about 4 minecraft servers plus a terraria server. Doesn't sound like much but many of those are modded and are very heavy on cpu and ram. Plus simple voice chat makes bandwidth usage skyrocket.
+
+### Jellyfin
+My Jellyfin server hosts a library of legally sourced anime and movies which I share with some friends and has let me cancel my crunchyroll subscription. 
+
+I plan to buy a 4TB HDD and add it to au-prox-01 to store this library whenever I have the money for it.
+
+### VPS Hosting
+Since my OptiPlex was just sitting around doing nothing I've repurposed it as a machine dedicated to hosting vms for friends, I can spin them up in seconds with my ubuntu vm template and I have a firewall group to block connections to my local network from them.
+
+For them to access it I get them to add it to their tailnet and then use that, if they want to expose stuff to the internet they can either use their own actual vps with a public ip forwarding to the tailnet address, ask me to change my caddy config or setup a port forwarding rule and expose it via my network.
+
+### Proxying my friends Homelabs
+As some of my friends who I've given hardware to for their own homlabs either can't port forward due to technical limitions or aren't allowed to touch their routers configuration I proxy their stuff through my network which has a static ip address and inline ddos protection.
+
+To connect back to their house without punching holes in their firewalls I use tailscale to establish encrypted tunnels directly to their servers, the only downside of this is if my homelab goes down It'll take theirs down with it.
+
+However that rarely happens and usually when my place goes down its due to a power outage which is affecting a large amount of my area so their servers are likely down too.
+
+## Closing Thoughts
+My homelab is turning into more of a central hub for my friends and acquaintances as it literally runs everything: game servers, vpses, self-hosted apps, jellyfin (stream videos and shows) and exposes other peoples homelabs.
+
+I'll be making a super detailed breakdown of everything running, this post is just about all the changes I've made.
+## Compute Nodes - [Live Status](https://status.alecks.dev)
+
+
+| Name | CPU | RAM | Storage |
+| -------- | ------- | ------- | ------ |
+| au-prox-01 | Ryzen 5 5500 | 64GB DDR4 | 1TB NVMe + ~~4TB HDD~~ (Soon) |
+| au-prox-02 | Core i5-7400T | 8GB DDR4 | 256GB NVMe SSD |
+| au-prox-03 | Core i7-7700 | 16GB DDR4 | 256GB NVMe SSD |
+| au-mtr-01 | Core i3-4130T | 8GB DDR3 | 256GB SATA SSD |
+
+Snapshot of all my current machines

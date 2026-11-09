@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Monitoring on Alecks</title>
+    <link>http://localhost:1313/tags/monitoring/</link>
+    <description>Recent content in Monitoring on Alecks</description>
+    <image>
+      <title>Alecks</title>
+      <url>http://localhost:1313/images/papermod-cover.png</url>
+      <link>http://localhost:1313/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Alecks 2025</copyright>
+    <lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Moving to Prometheus and deploying a k3s cluster</title>
+      <link>http://localhost:1313/posts/prometheus-and-k3s/</link>
+      <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/prometheus-and-k3s/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been watching a lot of homelabbing content recently and decided to setup some new services specifically for improving reliability, observability and adding new functionality.&lt;/p&gt;
+&lt;p&gt;My knowledge is quite limited currently as I&amp;rsquo;m just getting started, I intend to slowly improve these setups overtime.&lt;/p&gt;
+&lt;h2 id=&#34;prometheus-and-grafana--on-prem-monitoring&#34;&gt;Prometheus and Grafana / On-prem monitoring&lt;/h2&gt;
+&lt;p&gt;To prevent me from having no insignt into my homelab during an internet outage, I needed a monitoring solution that runs locally and stores everything locally, not on someone elses server. So I landed on prometheus as the monitoring service hooked up to grafana to visualize the data all running in docker.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

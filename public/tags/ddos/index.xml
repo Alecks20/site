@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ddos on Alecks</title>
+    <link>http://localhost:1313/tags/ddos/</link>
+    <description>Recent content in Ddos on Alecks</description>
+    <image>
+      <title>Alecks</title>
+      <url>http://localhost:1313/images/papermod-cover.png</url>
+      <link>http://localhost:1313/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Alecks 2025</copyright>
+    <lastBuildDate>Sat, 24 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ddos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Common Misconceptions about IP Addresses</title>
+      <link>http://localhost:1313/posts/ip-address-misconceptions/</link>
+      <pubDate>Sat, 24 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ip-address-misconceptions/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s a common misconception that if someone gets your IP address they can find your real home address, get your exact location, hack all your passwords, etc. None of this is true and the only real threat is something like a DDoS attack (Not the same as being doxxed). They can usually also see your general location like City or Neighborhood depending on where you are, you can see what your IP says about you on a site like &lt;a href=&#34;https://whatismyipaddress.com&#34;&gt;this&lt;/a&gt; if you&amp;rsquo;re worried about it.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

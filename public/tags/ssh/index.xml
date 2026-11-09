@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ssh on Alecks</title>
+    <link>http://localhost:1313/tags/ssh/</link>
+    <description>Recent content in Ssh on Alecks</description>
+    <image>
+      <title>Alecks</title>
+      <url>http://localhost:1313/images/papermod-cover.png</url>
+      <link>http://localhost:1313/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Alecks 2025</copyright>
+    <lastBuildDate>Thu, 25 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Securing ssh on your Linux Server</title>
+      <link>http://localhost:1313/posts/securing-server/</link>
+      <pubDate>Thu, 25 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/securing-server/</guid>
+      <description>&lt;p&gt;This post is made for debian based linux distros.&lt;/p&gt;
+&lt;h3 id=&#34;dont-expose-ssh-use-a-vpn&#34;&gt;Don&amp;rsquo;t expose ssh, use a VPN&lt;/h3&gt;
+&lt;p&gt;This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.&lt;/p&gt;
+&lt;h3 id=&#34;non-root-account-for-logins--disable-root-login&#34;&gt;Non-root account for logins / Disable root login&lt;/h3&gt;
+&lt;p&gt;Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

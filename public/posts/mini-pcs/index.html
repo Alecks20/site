@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Mini PCs are perfect Home Servers | Alecks</title>
+<meta name="keywords" content="servers, homelab, self-hosting">
+<meta name="description" content="Recently I picked up a $100 Lenovo ThinkCentre M710Q off ebay with an i5 7400T, 8GB of ram and a 256GB NVMe SSD to add to my Proxmox cluster.
+The good &amp; Bad
+Mini PCs are built to be small, quiet and power efficient, perfect for a home server. They&rsquo;re also tiny, hence the name meaning they can live pretty much anywhere.
+However, their form factor makes them hard to upgrade for future expandability and hard to add redundant storage to.">
+<meta name="author" content="Alecks">
+<link rel="canonical" href="http://localhost:1313/posts/mini-pcs/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2fd9135862a3da866393a267370bb97cd812193a02eb63558b88b00f30ec3648.css" integrity="sha256-L9kTWGKj2oZjk6JnNwu5fNgSGToC62NVi4iwDzDsNkg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/mini-pcs/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/mini-pcs/">
+  <meta property="og:site_name" content="Alecks">
+  <meta property="og:title" content="Mini PCs are perfect Home Servers">
+  <meta property="og:description" content="Recently I picked up a $100 Lenovo ThinkCentre M710Q off ebay with an i5 7400T, 8GB of ram and a 256GB NVMe SSD to add to my Proxmox cluster.
+The good &amp; Bad Mini PCs are built to be small, quiet and power efficient, perfect for a home server. They’re also tiny, hence the name meaning they can live pretty much anywhere.
+However, their form factor makes them hard to upgrade for future expandability and hard to add redundant storage to.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-30T00:00:00+00:00">
+    <meta property="article:tag" content="Servers">
+    <meta property="article:tag" content="Homelab">
+    <meta property="article:tag" content="Self-Hosting">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+  <meta name="twitter:title" content="Mini PCs are perfect Home Servers">
+  <meta name="twitter:description" content="Recently I picked up a $100 Lenovo ThinkCentre M710Q off ebay with an i5 7400T, 8GB of ram and a 256GB NVMe SSD to add to my Proxmox cluster.
+The good &amp; Bad Mini PCs are built to be small, quiet and power efficient, perfect for a home server. They’re also tiny, hence the name meaning they can live pretty much anywhere.
+However, their form factor makes them hard to upgrade for future expandability and hard to add redundant storage to.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Mini PCs are perfect Home Servers",
+      "item": "http://localhost:1313/posts/mini-pcs/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mini PCs are perfect Home Servers",
+  "name": "Mini PCs are perfect Home Servers",
+  "description": "Recently I picked up a $100 Lenovo ThinkCentre M710Q off ebay with an i5 7400T, 8GB of ram and a 256GB NVMe SSD to add to my Proxmox cluster.\nThe good \u0026amp; Bad Mini PCs are built to be small, quiet and power efficient, perfect for a home server. They\u0026rsquo;re also tiny, hence the name meaning they can live pretty much anywhere.\nHowever, their form factor makes them hard to upgrade for future expandability and hard to add redundant storage to.\n",
+  "keywords": [
+    "servers", "homelab", "self-hosting"
+  ],
+  "articleBody": "Recently I picked up a $100 Lenovo ThinkCentre M710Q off ebay with an i5 7400T, 8GB of ram and a 256GB NVMe SSD to add to my Proxmox cluster.\nThe good \u0026 Bad Mini PCs are built to be small, quiet and power efficient, perfect for a home server. They’re also tiny, hence the name meaning they can live pretty much anywhere.\nHowever, their form factor makes them hard to upgrade for future expandability and hard to add redundant storage to.\nWhere to buy them I’d recommend having a browse on eBay, find a listing with lots available which means they’re selling in bulk and make sure its not “barebones” since then your pretty much just getting a motherboard and case.\nWhy they’re such good value Similar to Thinkpads, businesses buy these machines in bulk and then decommision the old ones selling them in bulk for cheap.\n",
+  "wordCount" : "147",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2025-08-30T00:00:00Z",
+  "dateModified": "2025-08-30T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alecks"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/mini-pcs/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Alecks",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicons/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Alecks (Alt + H)">Alecks</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/skills/" title="Skills">
+                    <span>Skills</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/homelab/" title="Homelab">
+                    <span>Homelab</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search">
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      Mini PCs are perfect Home Servers
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-08-30T00:00:00+00:00'>August 30, 2025</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>Alecks</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">Table of Contents</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#the-good--bad" aria-label="The good &amp; Bad">The good &amp; Bad</a></li>
+            <li>
+                <a href="#where-to-buy-them" aria-label="Where to buy them">Where to buy them</a></li>
+            <li>
+                <a href="#why-theyre-such-good-value" aria-label="Why they&rsquo;re such good value">Why they&rsquo;re such good value</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p>Recently I picked up a $100 Lenovo ThinkCentre M710Q off ebay with an i5 7400T, 8GB of ram and a 256GB NVMe SSD to add to my Proxmox cluster.</p>
+<h3 id="the-good--bad">The good &amp; Bad<a hidden class="anchor" aria-hidden="true" href="#the-good--bad">#</a></h3>
+<p>Mini PCs are built to be small, quiet and power efficient, perfect for a home server. They&rsquo;re also tiny, hence the name meaning they can live pretty much anywhere.</p>
+<p>However, their form factor makes them hard to upgrade for future expandability and hard to add redundant storage to.</p>
+<h3 id="where-to-buy-them">Where to buy them<a hidden class="anchor" aria-hidden="true" href="#where-to-buy-them">#</a></h3>
+<p>I&rsquo;d recommend having a browse on eBay, find a listing with lots available which means they&rsquo;re selling in bulk and make sure its not &ldquo;barebones&rdquo; since then your pretty much just getting a motherboard and case.</p>
+<h3 id="why-theyre-such-good-value">Why they&rsquo;re such good value<a hidden class="anchor" aria-hidden="true" href="#why-theyre-such-good-value">#</a></h3>
+<p>Similar to Thinkpads, businesses buy these machines in bulk and then decommision the old ones selling them in bulk for cheap.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/servers/">Servers</a></li>
+      <li><a href="http://localhost:1313/tags/homelab/">Homelab</a></li>
+      <li><a href="http://localhost:1313/tags/self-hosting/">Self-Hosting</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Alecks 2025</span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        
+        let menuScrollTimeout;
+        menu.addEventListener("scroll", function () {
+            clearTimeout(menuScrollTimeout);
+            menuScrollTimeout = setTimeout(function () {
+                localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+            }, 150);
+        }, { passive: true });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            const target = document.querySelector(`[id='${decodeURIComponent(id)}']`);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                target.scrollIntoView();
+            }
+            
+            
+            if (target.tabIndex < 0 && !target.hasAttribute("tabindex")) {
+                target.setAttribute("tabindex", "-1");
+            }
+            target.focus({ preventScroll: true });
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    var scrollTicking = false;
+    
+    window.addEventListener("scroll", function () {
+        if (scrollTicking) {
+            return;
+        }
+        scrollTicking = true;
+        requestAnimationFrame(function () {
+            const scrollThreshold = window.innerHeight;
+            const shown = document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold;
+            toplink.classList.toggle("hidden", !shown);
+            scrollTicking = false;
+        });
+    }, { passive: true });
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

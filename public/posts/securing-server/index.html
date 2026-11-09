@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Securing ssh on your Linux Server | Alecks</title>
+<meta name="keywords" content="linux, servers, ssh, security">
+<meta name="description" content="This post is made for debian based linux distros.
+Don&rsquo;t expose ssh, use a VPN
+This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.
+Non-root account for logins / Disable root login
+Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want">
+<meta name="author" content="Alecks">
+<link rel="canonical" href="http://localhost:1313/posts/securing-server/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2fd9135862a3da866393a267370bb97cd812193a02eb63558b88b00f30ec3648.css" integrity="sha256-L9kTWGKj2oZjk6JnNwu5fNgSGToC62NVi4iwDzDsNkg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/securing-server/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/securing-server/">
+  <meta property="og:site_name" content="Alecks">
+  <meta property="og:title" content="Securing ssh on your Linux Server">
+  <meta property="og:description" content="This post is made for debian based linux distros.
+Don’t expose ssh, use a VPN This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.
+Non-root account for logins / Disable root login Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-04-25T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Servers">
+    <meta property="article:tag" content="Ssh">
+    <meta property="article:tag" content="Security">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+  <meta name="twitter:title" content="Securing ssh on your Linux Server">
+  <meta name="twitter:description" content="This post is made for debian based linux distros.
+Don’t expose ssh, use a VPN This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.
+Non-root account for logins / Disable root login Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Securing ssh on your Linux Server",
+      "item": "http://localhost:1313/posts/securing-server/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Securing ssh on your Linux Server",
+  "name": "Securing ssh on your Linux Server",
+  "description": "This post is made for debian based linux distros.\nDon\u0026rsquo;t expose ssh, use a VPN This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.\nNon-root account for logins / Disable root login Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want\n",
+  "keywords": [
+    "linux", "servers", "ssh", "security"
+  ],
+  "articleBody": "This post is made for debian based linux distros.\nDon’t expose ssh, use a VPN This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.\nNon-root account for logins / Disable root login Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want\nadduser kuma Then add it to the list of sudoers\nusermod -aG sudo kuma Using SSH keys over plaintext passwords SSH Keys are both more convenient and more secure than a regular plaintext password, especially the default one set by your hosting provider.\nGenerate an ssh key using PuttyGen and paste it on a new line in /home//.ssh/authorized_keys.\nUpdating your SSH configuration This process can differ depending on your host, but for most servers the ssh config is located in /etc/ssh/sshd_config, in the file you want to change the following values.\nPasswordAuthentication no PubkeyAuthentication yes PermitRootLogin no Changing these config values will\nDisable password authentication Allow you to login using ssh keys (Which I showed how to setup above) Disable root login (Applying the steps from before) Run the command below to apply the motifications\nsudo systemctl restart ssh NTFY notifcations on ssh login You can learn how to setup a secure personal ntfy server here.\nAdding these lines to your /etc/profile file will send a request to your chosen ntfy server when any user logs in via ssh\nif [ -n \"$SSH_CLIENT\" ]; then\rNTFY=\"${USER}@$(hostname -f) from $(echo $SSH_CLIENT|awk '{print $1}')\"\rcurl -u : -s -H \"Title: SSH Login\" -d \"$NTFY\" -L \"https://ntfy.exaple.com/ssh\" \u003e /dev/null\rfi Modify to add your own api key and change the url to your ntfy server\nYou can also find an example on the ntfy docs here (Didn’t work for me)\n",
+  "wordCount" : "328",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2024-04-25T00:00:00Z",
+  "dateModified": "2024-04-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alecks"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/securing-server/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Alecks",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicons/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Alecks (Alt + H)">Alecks</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/homelab/" title="Homelab">
+                    <span>Homelab</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      Securing ssh on your Linux Server
+    </h1>
+    <div class="post-meta">
+
+<span title='2024-04-25T00:00:00+00:00'>April 25, 2024</span>&nbsp;·&nbsp;<span>2 min</span>&nbsp;·&nbsp;<span>Alecks</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">Table of Contents</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#dont-expose-ssh-use-a-vpn" aria-label="Don&rsquo;t expose ssh, use a VPN">Don&rsquo;t expose ssh, use a VPN</a></li>
+            <li>
+                <a href="#non-root-account-for-logins--disable-root-login" aria-label="Non-root account for logins / Disable root login">Non-root account for logins / Disable root login</a></li>
+            <li>
+                <a href="#using-ssh-keys-over-plaintext-passwords" aria-label="Using SSH keys over plaintext passwords">Using SSH keys over plaintext passwords</a></li>
+            <li>
+                <a href="#updating-your-ssh-configuration" aria-label="Updating your SSH configuration">Updating your SSH configuration</a></li>
+            <li>
+                <a href="#ntfy-notifcations-on-ssh-login" aria-label="NTFY notifcations on ssh login">NTFY notifcations on ssh login</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p>This post is made for debian based linux distros.</p>
+<h3 id="dont-expose-ssh-use-a-vpn">Don&rsquo;t expose ssh, use a VPN<a hidden class="anchor" aria-hidden="true" href="#dont-expose-ssh-use-a-vpn">#</a></h3>
+<p>This is obviously not viable for stuff running in the cloud but for a homelab server its advised to not expose ssh or management ports, if you need external access use a VPN service like Tailscale or self-hosted Wireguard.</p>
+<h3 id="non-root-account-for-logins--disable-root-login">Non-root account for logins / Disable root login<a hidden class="anchor" aria-hidden="true" href="#non-root-account-for-logins--disable-root-login">#</a></h3>
+<p>Disabling the ability to login as root helps with many automated bots that brute-force ssh into your server, start by making a new user with any username you want</p>
+<pre tabindex="0"><code>adduser kuma
+</code></pre><p>Then add it to the list of sudoers</p>
+<pre tabindex="0"><code>usermod -aG sudo kuma
+</code></pre><h3 id="using-ssh-keys-over-plaintext-passwords">Using SSH keys over plaintext passwords<a hidden class="anchor" aria-hidden="true" href="#using-ssh-keys-over-plaintext-passwords">#</a></h3>
+<p>SSH Keys are both more convenient and more secure than a regular plaintext password, especially the default one set by your hosting provider.</p>
+<p>Generate an ssh key using PuttyGen and paste it on a new line in <code>/home/&lt;your_username&gt;/.ssh/authorized_keys</code>.</p>
+<h3 id="updating-your-ssh-configuration">Updating your SSH configuration<a hidden class="anchor" aria-hidden="true" href="#updating-your-ssh-configuration">#</a></h3>
+<p>This process can differ depending on your host, but for most servers the ssh config is located in <code>/etc/ssh/sshd_config</code>, in the file you want to change the following values.</p>
+<pre tabindex="0"><code>PasswordAuthentication no
+</code></pre><pre tabindex="0"><code>PubkeyAuthentication yes
+</code></pre><pre tabindex="0"><code>PermitRootLogin no
+</code></pre><p>Changing these config values will</p>
+<ul>
+<li>Disable password authentication</li>
+<li>Allow you to login using ssh keys (Which I showed how to setup above)</li>
+<li>Disable root login (Applying the steps from before)</li>
+</ul>
+<p>Run the command below to apply the motifications</p>
+<pre tabindex="0"><code>sudo systemctl restart ssh
+</code></pre><h3 id="ntfy-notifcations-on-ssh-login">NTFY notifcations on ssh login<a hidden class="anchor" aria-hidden="true" href="#ntfy-notifcations-on-ssh-login">#</a></h3>
+<p>You can learn how to setup a secure personal ntfy server <a href="/posts/ntfy-server/">here</a>.</p>
+<p>Adding these lines to your <code>/etc/profile</code> file will send a request to your chosen ntfy server when any user logs in via ssh</p>
+<pre tabindex="0"><code>if [ -n &#34;$SSH_CLIENT&#34; ]; then
+
+NTFY=&#34;${USER}@$(hostname -f) from $(echo $SSH_CLIENT|awk &#39;{print $1}&#39;)&#34;
+
+curl -u :&lt;ntfy_api_key&gt; -s -H &#34;Title: SSH Login&#34; -d &#34;$NTFY&#34; -L  &#34;https://ntfy.exaple.com/ssh&#34; &gt; /dev/null
+
+fi
+</code></pre><p>Modify to add your own api key and change the url to your ntfy server</p>
+<p>You can also find an example on the ntfy docs <a href="https://docs.ntfy.sh/examples/#ssh-login-alerts">here</a> (Didn&rsquo;t work for me)</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="http://localhost:1313/tags/servers/">Servers</a></li>
+      <li><a href="http://localhost:1313/tags/ssh/">Ssh</a></li>
+      <li><a href="http://localhost:1313/tags/security/">Security</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Alecks 2025</span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        
+        let menuScrollTimeout;
+        menu.addEventListener("scroll", function () {
+            clearTimeout(menuScrollTimeout);
+            menuScrollTimeout = setTimeout(function () {
+                localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+            }, 150);
+        }, { passive: true });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            const target = document.querySelector(`[id='${decodeURIComponent(id)}']`);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                target.scrollIntoView();
+            }
+            
+            
+            if (target.tabIndex < 0 && !target.hasAttribute("tabindex")) {
+                target.setAttribute("tabindex", "-1");
+            }
+            target.focus({ preventScroll: true });
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    var scrollTicking = false;
+    
+    window.addEventListener("scroll", function () {
+        if (scrollTicking) {
+            return;
+        }
+        scrollTicking = true;
+        requestAnimationFrame(function () {
+            const scrollThreshold = window.innerHeight;
+            const shown = document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold;
+            toplink.classList.toggle("hidden", !shown);
+            scrollTicking = false;
+        });
+    }, { passive: true });
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

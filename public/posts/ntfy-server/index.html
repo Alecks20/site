@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Setting up and securing a personal NTFY server | Alecks</title>
+<meta name="keywords" content="servers, self-hosting, ntfy, docker">
+<meta name="description" content="Ntfy is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.
+Heres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on here.">
+<meta name="author" content="Alecks">
+<link rel="canonical" href="http://localhost:1313/posts/ntfy-server/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2fd9135862a3da866393a267370bb97cd812193a02eb63558b88b00f30ec3648.css" integrity="sha256-L9kTWGKj2oZjk6JnNwu5fNgSGToC62NVi4iwDzDsNkg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/ntfy-server/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/ntfy-server/">
+  <meta property="og:site_name" content="Alecks">
+  <meta property="og:title" content="Setting up and securing a personal NTFY server">
+  <meta property="og:description" content="Ntfy is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.
+Heres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on here.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-06T00:00:00+00:00">
+    <meta property="article:tag" content="Servers">
+    <meta property="article:tag" content="Self-Hosting">
+    <meta property="article:tag" content="Ntfy">
+    <meta property="article:tag" content="Docker">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+  <meta name="twitter:title" content="Setting up and securing a personal NTFY server">
+  <meta name="twitter:description" content="Ntfy is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.
+Heres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on here.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Setting up and securing a personal NTFY server",
+      "item": "http://localhost:1313/posts/ntfy-server/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Setting up and securing a personal NTFY server",
+  "name": "Setting up and securing a personal NTFY server",
+  "description": "Ntfy is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.\nHeres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on here.\n",
+  "keywords": [
+    "servers", "self-hosting", "ntfy", "docker"
+  ],
+  "articleBody": "Ntfy is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.\nHeres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on here.\nInitial Setup Config File Make a directory at /etc/ntfy then setup a config file\nsudo mkdir /etc/ntfy\rsudo nano /etc/ntfy/server.yml Copy paste the text below into server.yml with the required changes\n# General Config\rbase-url: \"https://ntfy.example.com\" # Change this to your URL\rupstream-base-url: \"https://ntfy.sh\" # Required for notifications to work on iPhone\r# Authentication\rauth-file: \"/var/lib/ntfy/user.db\"\rauth-default-access: \"deny-all\" # Block access to channels by default unless logged in User Database Creation You have to manually create a user.db file in /var/lib/ntfy/user.db otherwise this won’t work\nsudo mkdir /var/lib/ntfy/\rsudo touch /var/lib/ntfy/user.db Then save that file with nothing in it\nContainer Creation Install Docker for your distribution\nsudo apt install docker.io # (Ubuntu/Debian)\rsudo dnf install docker # (Fedora/Red Hat) Then run the command below which will\nCreate a container for ntfy (named ntfy) Run it in the background (-d) Start at boot unless it was stopped (–restart=unless-stopped) Expose port 80 to 127.0.0.1:8080 so your reverse proxy can access it but its not exposed at your machines public IP Map directories for a cache and config file sudo docker run \\\r-d \\\r-v /var/cache/ntfy:/var/cache/ntfy \\\r-v /etc/ntfy:/etc/ntfy \\\r-v /var/lib/ntfy:/var/lib/ntfy \\\r-p 127.0.0.1:8080:80 \\\r--name=ntfy \\\r--restart=unless-stopped \\\rbinwiederhier/ntfy \\\rserve \\\r--cache-file /var/cache/ntfy/cache.db Reverse Proxy Configuration Since its the best plug-and-play solution I’ll be using Caddy for this guide, but there are several others, for example Nginx\nInstall Caddy and edit the Caddyfile\nsudo apt install caddy -y\rsudo nano /etc/caddy/Caddyfile Then paste this config into it, replacing example.com with your actual domain of course\nntfy.example.com {\rreverse_proxy http://127.0.0.1:8080\r} Finally, restart your Caddy server\nsudo systemctl restart caddy Your ntfy instance should now be securely exposed!! Caddy will automatically fetch and install an SSL certificate for you\nSetting up Authentication Only being able to access your server with an account was already configured in the initial setup process, now you just need to create an account to access it\nAttach the ntfy containers shell\nsudo docker exec -it ntfy /bin/sh Then create a user account with the admin role\nntfy user add --role=admin example It will then prompt you for a password, obviously change “example” to any username you want\nAlso, when sending notifications to channels most services want an access token, which you can create with this command\nntfy token add example Hope this guide was helpful - for its creation I used several sections from the ntfy docs and a networkchuck video\n",
+  "wordCount" : "491",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2025-09-06T00:00:00Z",
+  "dateModified": "2025-09-06T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alecks"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/ntfy-server/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Alecks",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicons/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Alecks (Alt + H)">Alecks</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/homelab/" title="Homelab">
+                    <span>Homelab</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      Setting up and securing a personal NTFY server
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-09-06T00:00:00+00:00'>September 6, 2025</span>&nbsp;·&nbsp;<span>3 min</span>&nbsp;·&nbsp;<span>Alecks</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">Table of Contents</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#initial-setup" aria-label="Initial Setup">Initial Setup</a><ul>
+                    
+            <li>
+                <a href="#config-file" aria-label="Config File">Config File</a></li>
+            <li>
+                <a href="#user-database-creation" aria-label="User Database Creation">User Database Creation</a></li>
+            <li>
+                <a href="#container-creation" aria-label="Container Creation">Container Creation</a></li></ul>
+            </li>
+            <li>
+                <a href="#reverse-proxy-configuration" aria-label="Reverse Proxy Configuration">Reverse Proxy Configuration</a></li>
+            <li>
+                <a href="#setting-up-authentication" aria-label="Setting up Authentication">Setting up Authentication</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p><a href="https://ntfy.sh">Ntfy</a> is an absolutely amazing service for sending push notifications to your phone or other devices with a simple web request, I use it for alerts from my uptime monitor (HetrixTools) and ssh logins. Mine is hosted on a google cloud free tier e2 micro instance which gives me great reliability for free.</p>
+<p>Heres how to set it up with docker and proper authentication for personal use - you can find a guide on how to secure whatever Linux server your hosting this on <a href="/posts/securing-server/">here</a>.</p>
+<h2 id="initial-setup">Initial Setup<a hidden class="anchor" aria-hidden="true" href="#initial-setup">#</a></h2>
+<h3 id="config-file">Config File<a hidden class="anchor" aria-hidden="true" href="#config-file">#</a></h3>
+<p>Make a directory at /etc/ntfy then setup a config file</p>
+<pre tabindex="0"><code>sudo mkdir /etc/ntfy
+sudo nano /etc/ntfy/server.yml
+</code></pre><p>Copy paste the text below into server.yml with the required changes</p>
+<pre tabindex="0"><code># General Config
+base-url: &#34;https://ntfy.example.com&#34; # Change this to your URL
+upstream-base-url: &#34;https://ntfy.sh&#34; # Required for notifications to work on iPhone
+
+# Authentication
+auth-file: &#34;/var/lib/ntfy/user.db&#34;
+auth-default-access: &#34;deny-all&#34; # Block access to channels by default unless logged in
+</code></pre><h3 id="user-database-creation">User Database Creation<a hidden class="anchor" aria-hidden="true" href="#user-database-creation">#</a></h3>
+<p>You have to manually create a user.db file in /var/lib/ntfy/user.db otherwise this won&rsquo;t work</p>
+<pre tabindex="0"><code>sudo mkdir /var/lib/ntfy/
+sudo touch /var/lib/ntfy/user.db
+</code></pre><p>Then save that file with nothing in it</p>
+<h3 id="container-creation">Container Creation<a hidden class="anchor" aria-hidden="true" href="#container-creation">#</a></h3>
+<p>Install Docker for your distribution</p>
+<pre tabindex="0"><code>sudo apt install docker.io # (Ubuntu/Debian)
+sudo dnf install docker # (Fedora/Red Hat)
+</code></pre><p>Then run the command below which will</p>
+<ul>
+<li>Create a container for ntfy (named ntfy)</li>
+<li>Run it in the background (-d)</li>
+<li>Start at boot unless it was stopped (&ndash;restart=unless-stopped)</li>
+<li>Expose port 80 to 127.0.0.1:8080 so your reverse proxy can access it but its not exposed at your machines public IP</li>
+<li>Map directories for a cache and config file</li>
+</ul>
+<pre tabindex="0"><code>sudo docker run \
+-d \
+-v /var/cache/ntfy:/var/cache/ntfy \
+-v /etc/ntfy:/etc/ntfy \
+-v /var/lib/ntfy:/var/lib/ntfy \
+-p 127.0.0.1:8080:80 \
+--name=ntfy \
+--restart=unless-stopped \
+binwiederhier/ntfy \
+serve \
+--cache-file /var/cache/ntfy/cache.db
+</code></pre><h2 id="reverse-proxy-configuration">Reverse Proxy Configuration<a hidden class="anchor" aria-hidden="true" href="#reverse-proxy-configuration">#</a></h2>
+<p>Since its the best plug-and-play solution I&rsquo;ll be using <a href="https://caddyserver.com">Caddy</a> for this guide, but there are several others, for example <a href="https://nginx.org">Nginx</a></p>
+<p>Install Caddy and edit the Caddyfile</p>
+<pre tabindex="0"><code>sudo apt install caddy -y
+sudo nano /etc/caddy/Caddyfile
+</code></pre><p>Then paste this config into it, replacing example.com with your actual domain of course</p>
+<pre tabindex="0"><code>ntfy.example.com {
+    reverse_proxy http://127.0.0.1:8080
+}
+</code></pre><p>Finally, restart your Caddy server</p>
+<pre tabindex="0"><code>sudo systemctl restart caddy
+</code></pre><p>Your ntfy instance should now be securely exposed!! Caddy will automatically fetch and install an SSL certificate for you</p>
+<h2 id="setting-up-authentication">Setting up Authentication<a hidden class="anchor" aria-hidden="true" href="#setting-up-authentication">#</a></h2>
+<p>Only being able to access your server with an account was already configured in the initial setup process, now you just need to create an account to access it</p>
+<p>Attach the ntfy containers shell</p>
+<pre tabindex="0"><code>sudo docker exec -it ntfy /bin/sh
+</code></pre><p>Then create a user account with the admin role</p>
+<pre tabindex="0"><code>ntfy user add --role=admin example
+</code></pre><p>It will then prompt you for a password, obviously change &ldquo;example&rdquo; to any username you want</p>
+<p>Also, when sending notifications to channels most services want an access token, which you can create with this command</p>
+<pre tabindex="0"><code>ntfy token add example
+</code></pre><p>Hope this guide was helpful - for its creation I used several sections from the <a href="https://docs.ntfy.sh/">ntfy docs</a> and a <a href="https://www.youtube.com/watch?v=poDIT2ruQ9M">networkchuck video</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/servers/">Servers</a></li>
+      <li><a href="http://localhost:1313/tags/self-hosting/">Self-Hosting</a></li>
+      <li><a href="http://localhost:1313/tags/ntfy/">Ntfy</a></li>
+      <li><a href="http://localhost:1313/tags/docker/">Docker</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Alecks 2025</span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        
+        let menuScrollTimeout;
+        menu.addEventListener("scroll", function () {
+            clearTimeout(menuScrollTimeout);
+            menuScrollTimeout = setTimeout(function () {
+                localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+            }, 150);
+        }, { passive: true });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            const target = document.querySelector(`[id='${decodeURIComponent(id)}']`);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                target.scrollIntoView();
+            }
+            
+            
+            if (target.tabIndex < 0 && !target.hasAttribute("tabindex")) {
+                target.setAttribute("tabindex", "-1");
+            }
+            target.focus({ preventScroll: true });
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    var scrollTicking = false;
+    
+    window.addEventListener("scroll", function () {
+        if (scrollTicking) {
+            return;
+        }
+        scrollTicking = true;
+        requestAnimationFrame(function () {
+            const scrollThreshold = window.innerHeight;
+            const shown = document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold;
+            toplink.classList.toggle("hidden", !shown);
+            scrollTicking = false;
+        });
+    }, { passive: true });
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
